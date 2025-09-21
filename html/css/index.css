@@ -1,0 +1,538 @@
+@font-face {
+    font-family: 'manrope';
+    src: url('/assets/fonts/Manrope/Manrope-VariableFont_wght.ttf');
+}
+html, body {
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(253, 253, 253);
+}
+button {
+    cursor: pointer;
+}
+button:hover {
+    transition-duration: 500ms;
+}
+* {
+    font-family: 'manrope', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+}
+nav {
+    background-color: #101010;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
+    z-index: 1;
+}
+.navbar {
+    display: none;
+}
+.hamburger {
+    display: none;
+}
+.audiophile {
+    fill: white;
+    transition-duration: 500ms;
+}
+.audiophile:hover {
+    fill: #D87D4A;
+}
+nav button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.checkout {
+    width: 100%;
+}
+.logo {
+    background-color: transparent;
+    border: none;
+}
+nav ul {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+nav li {
+    text-transform: uppercase;
+    font-weight: bold;
+    list-style: none;
+    color: white;
+    font-size: .815rem;
+    margin: .5em 1em;
+    cursor: pointer;
+    transition-duration: 500ms;
+}
+a {
+    color: white;
+    text-decoration: none;
+    font-size: .815rem;
+    transition-duration: 500ms;
+}
+nav li a:hover {
+    color: #D87D4A;
+}
+.cartContainer {
+    box-sizing: border-box;
+    background-color: #1b1b1b73;
+    height: 90vh;
+    justify-items: right;
+    animation: slideIn 800ms ease-in-out forwards;
+}
+.cartItems {
+    width: 18em;
+    background-color: white;
+    border-radius: 12px;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+}
+.cartItems .head, .cartItems .total {
+    display: flex;
+    justify-content: space-between;
+}
+.cartItems .head p, .cartItems .total p {
+    font-weight: bold;
+}
+.totalAmount {
+    color: black;
+}
+.cartItems .total{
+    color: rgb(160, 159, 159);
+}
+.cartItems .head button {
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+    line-height: 1.5625rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: rgb(160, 159, 159);
+}
+.cartItems .head button:hover {
+    color: #D87D4A;
+}
+.section_one {
+    background-color: rgb(26, 26, 26);
+    background-image: url('/assets/home/desktop/image-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-left: 2em;
+    display: flex;
+}
+
+.intro {
+    background-color: transparent;
+    max-width: 50%;
+    padding: 0;
+    padding-top: 10%;
+    margin-left: 2em;
+}
+h1 {
+    font-size: 4em;
+    text-transform: uppercase;
+    color: white;
+}
+.intro p {
+    color: hsla(0, 0%, 100%, 0.5);
+    width: 70%;
+    font-size: 1.1rem;
+}
+.intro button, .checkout {
+    border: none;
+    padding: 1em 1.5em;
+    color: white;
+    font-weight: bold;
+    background-color: #D87D4A;
+    margin: 1em 0 1% 0;
+    transition-duration: 500ms;
+}
+.intro button:hover, .checkout:hover {
+    background-color: rgb(235, 133, 96);
+}
+.section_two {
+    padding:  3em 10%;
+    margin-top: 5em;
+    display: flex;
+    flex-direction: column;
+}
+.products {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5em;
+    margin-top: 2em;
+}
+.products .product {
+    background-color: rgb(240, 234, 234);
+    border-radius: 8px;
+    padding: 1em;
+    text-align: center;
+    height: 8em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.products .product .items {
+    border-radius: 6px;
+    width: 13em;
+}
+.products .product p {
+    text-transform: uppercase;
+    margin-top: 0;
+    font-weight: bold;
+}
+.products .product button {
+    background-color: transparent;
+    border: none;
+    color: rgb(117, 116, 116);
+    text-transform: uppercase;
+    align-items: center;
+    justify-content: center;
+    font-size: .9em;
+}
+.products .product button:hover{
+    color: #D87D4A;
+}
+.zx9 {
+    background-color: #D87D4A;
+    background-image: url('/assets/home/desktop/pattern-circles.svg');
+    border-radius: 10px;
+    display: flex;
+    padding: 9em 1em 0 1em;
+    margin-top: 9em;
+}
+.zx9 .about {
+    display: flex;
+    flex-direction: column;
+}
+.zx9 img {
+    width: 70%;
+    min-width: 17em;
+    
+}
+.zx9 .speaker-img {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.zx9 .about button {
+    border: none;
+    padding: 1em 1.5em;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: rgb(26, 25, 25);
+    margin: 1em 0 1% 0;
+    max-width: 10em;
+}
+.zx9 .about p {
+    color: rgb(211, 192, 192);
+    width: 80%;
+    line-height: 1.5625rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+}
+.zx7 {
+    border-radius: 10px;
+    background-image: url("/assets/home/desktop/image-speaker-zx7.jpg") ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 2em;
+    margin: 6em 0;
+}
+.zx7 h2, .yx1 h2 {
+    text-transform: uppercase;
+    font-size: 2rem;
+    
+}
+.zx7 button, .yx1 button {
+    border: 1px solid black;
+    padding: 1em 1.5em;
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: transparent;
+    margin: 1em 0;
+}
+.zx7 button:hover, .yx1 button:hover {
+    color: white;
+    background-color: black;
+}
+.yx1 {
+    display: flex;
+    gap: 5%;
+}
+.yx1 .earphones-img {
+    width: 50%;
+    
+}
+.yx1 .earphones-img img {
+    border-radius: 10px;
+    min-width: 22em;
+    width: 100%;
+}
+.yx1 .about {
+    width: 50%;
+    padding: 1em;
+    background-color: rgb(238, 238, 238);
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+.location {
+    margin-top: 6em;
+    display: flex;
+    align-items: center;
+}
+.location .img {
+    width: 50%;
+}
+.location .img img {
+    width: 100%;
+    border-radius: 10px;
+}
+.location .about {
+    width: 50%;
+    padding: 1em;
+}
+.location .about h1 {
+    color: black;
+    font-size: 3em;
+    font-weight: 600;
+}
+.location .about p {
+    width: 90%;
+    font-weight: 400;
+}
+.location .about h1 span {
+    color: #D87D4A;
+}
+footer {
+    background-color: #101010;
+    padding: 5em 7em;
+    position: relative;
+}
+footer .lowerNav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+footer .lowerNav ul {
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+}
+footer .lowerNav li {
+        text-transform: uppercase;
+        font-weight: bold;
+        list-style: none;
+        color: white;
+        font-size: .815rem;
+        margin: .5em 1em;
+        cursor: pointer;
+}
+footer .lowerNav li a {
+    color: white;
+    text-decoration: none;
+    font-size: .815rem;
+    transition-duration: 500ms;
+}
+footer .lowerNav li a:hover {
+    color: #D87D4A;
+    transition-duration: 500ms;
+}
+footer p {
+    color: white;
+    opacity: .5;
+}
+footer .info {
+    display: flex;
+}
+footer .info p {
+    width: 50%;
+}
+footer .info .social {
+    width: 50%;
+    display: flex;
+    gap: 1em;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+footer .info .social button {
+    background-color: transparent;
+    border: none;
+}
+footer .info .social button .icon {
+    fill: #fff;
+}
+footer .info .social button .icon:hover {
+    transition-duration: 500ms;
+    fill: #D87D4A;
+}
+footer .copyright {
+    position: absolute;
+    bottom: 2em;
+}
+@keyframes slideIn {
+    from {
+        transform: translate(100%);
+    }
+    to {
+        transform: translate(0);
+    }
+}
+@media (max-width: 900px) {
+    .hamburger {
+        display: unset;
+        margin-right: 1em;
+    }
+    
+    .navbar {
+        display: block;
+        overflow: scroll;
+        background-color: #1b1b1b73;
+        padding: 2em;
+        padding-top: 20%;
+        height: 70vh;
+        animation: slideIn 800ms ease-in-out forwards;
+    }
+    .navbar .products {
+        margin-top: 0;
+    }
+    nav {
+        justify-content: space-between;
+    }
+    nav .logo {
+        margin-right: auto;
+    }
+    nav ul {
+        display: none;
+    }
+    
+    .section_one {
+        background-image: url('/assets/home/tablet/image-header.jpg');
+        background-position: center;
+        background-size: contain;
+        justify-content: center;
+        padding-left: 0;
+    }    
+    .intro {
+        background-color: transparent;
+        max-width: 80%;
+        text-align: center;
+        margin-left: 0;
+    }
+    .intro p {
+        width: 100%;
+    }
+    .products .product .items {
+        width: 100%;
+    }
+
+    .zx9 {
+        flex-direction: column;
+        padding: 5em 1em 7em 1em;
+    }
+    .zx9 img {
+        width: 50%;
+        min-width: 12em;
+    }
+    .zx9 .about {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .zx7 {
+        background-image: url("/assets/home/tablet/image-speaker-zx7.jpg");
+    }
+    .yx1 .earphones-img img {
+        min-width: 50%;
+        height: 100%;
+    }
+    .location {
+        flex-direction: column-reverse;
+    }
+    .location .about, .location .img {
+        width: 100%;
+        text-align: center;
+    }
+    .location .about p {
+        text-align: center;
+        width: 100%;
+    }
+    footer {
+        padding: 3em 2em;
+    }
+    footer .lowerNav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    footer .info {
+        flex-direction: column;
+    }
+    footer .info .social, footer .info p {
+        width: 100%;
+        padding: 2em 0;
+    }
+}
+@media (max-width: 650px) {
+    .section_one {
+        background-image: url("/assets/home/mobile/image-header.jpg");
+    }
+    h1 {
+        font-size: 3rem;
+    }
+    .section_two {
+        padding:  3em 8%;
+    }
+    .products {
+        flex-direction: column;
+        gap: 5em;
+    }
+    .products .product {
+        align-items: center;
+        max-width: 70%;
+    }
+    .products .product .items {
+        max-width: 50%;
+        min-width: 10em;
+    }
+    .yx1 {
+        flex-direction: column;
+    }
+    .yx1 .earphones-img, .yx1 .about {
+        width: 100%;
+        margin: 2em 0;
+    }
+    .location .about h1 {
+        font-size: 2rem;
+    }
+    footer .lowerNav ul {
+        justify-content: flex-start;
+
+    }
+}
+@media (max-width: 400px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    footer .lowerNav {
+        align-items: center;
+    }
+    footer .lowerNav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+.hide {
+    display: none;
+}
