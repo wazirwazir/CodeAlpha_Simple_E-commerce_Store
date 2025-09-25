@@ -390,6 +390,39 @@ footer .copyright {
         transform: translate(0);
     }
 }
+
+.add_to_cart_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.itemSold .about .item_price {
+    color: black;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.add_to_cart_container .cartBtn {
+    margin: 0;
+}
+.add_to_cart_container .item_quantity {
+    background-color: palegoldenrod;
+    display: flex;
+    align-items: center;
+
+}
+.add_to_cart_container .item_quantity button {
+    margin: 0;
+    padding: 10px 15px;
+}
+.add_to_cart_container .item_quantity .quantity_input {
+    width: 40px;
+    text-align: center;
+    color: black;
+    margin: 0;
+}
+
+
 @media (max-width: 900px) {
     .hamburger {
         display: unset;

@@ -56,7 +56,7 @@ button {
 .itemSold button:hover {
     background-color: rgb(235, 133, 96);
 }
-.zx7itemSold {
+.itemSold:nth-of-type(even) {
     flex-direction: row-reverse;
 }
 @media (max-width: 900px) {
@@ -76,4 +76,8 @@ button {
     .itemSold .about p {
         width: 100%;
     }
+    .itemSold:nth-of-type(even) {
+        flex-direction: column;
+    }
+
 }

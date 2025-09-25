@@ -47,4 +47,3 @@ submitBtn.addEventListener('click', ()=> {
     handleEmoneyError(eNumberInput, 9)
     handleEmoneyError(ePinInput, 4)
 })
-
