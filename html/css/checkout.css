@@ -26,12 +26,16 @@ form {
     display: flex;
     flex-direction: column;
 }
+.container {
+    width: 100%;
+}
 .form, .summary {
     background-color: rgb(253, 253, 253);
     padding: 1em 3em;
     margin: 0 0 2em 0;
     border-radius: 15px;
 }
+
 .subtitle {
     color: #D87D4A;
     text-transform: uppercase;
@@ -186,6 +190,9 @@ input[type=number] {
 .inputError {
     border-color: red;
 }
+.form {
+    width: 100%;
+}
 @media (min-width: 950px) {
     form {
         flex-direction: row;
@@ -193,8 +200,15 @@ input[type=number] {
     }
     .summary {
         height: 35%;
-        min-width: 300px;
+        min-width: 17%;
     }
+    .summary {
+        width: 43%;
+    }
+    .form {
+        width: 57%;
+    }
+    
 }
 @media (max-width: 650px) {
     .part_three {

@@ -19,14 +19,21 @@
                 <li><a href="./speakers.html">speaker</a></li>
                 <li><a href="./earphones.html">earphones</a></li>
             </ul>
-            <button class="checkCart"><img src="assets\cart\icon-cart.svg" alt="cart"></button>
+            <div class="check_cart">
+                <p class="cart_count cart_head"></p>
+                <button class="checkCart"><img src="assets\cart\icon-cart.svg" alt="cart"></button>
+            </div>
         </nav>
         <div class="cartContainer hide">
             <div class="cartItems">
                 <div class="head">
-                    <p>CART(<span>0</span>)</p>
+                    <p>CART(<span class="cart_count">0</span>)</p>
                     <button class="removeBtn">Remove all</button>
                 </div>
+                <div class="carted_items">
+                    
+                </div>
+                
                 <div class="total">
                     <p>TOTAL</p>
                     <p class="totalAmount">$<span>0</span></p>
@@ -74,7 +81,7 @@
         </div>
         <div class="section_two">
             <div class="items_sold">
-                
+
             </div>
             <div class="products">
                 <div class="product headphones">
