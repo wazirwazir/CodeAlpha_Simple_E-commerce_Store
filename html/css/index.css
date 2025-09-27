@@ -21,6 +21,7 @@ button:hover {
 header {
     position: fixed;
     width: 100%;
+    z-index: 99;
 }
 nav {
     background-color: #101010;
@@ -497,7 +498,7 @@ footer .copyright {
         background-color: #1b1b1b73;
         padding: 2em;
         padding-top: 20%;
-        height: 70vh;
+        height: 90vh;
         animation: slideIn 800ms ease-in-out forwards;
     }
     .navbar .products {
@@ -595,6 +596,7 @@ footer .copyright {
     .section_two {
         padding:  3em 8%;
     }
+    
     .products {
         flex-direction: column;
         gap: 5em;
@@ -625,6 +627,9 @@ footer .copyright {
 @media (max-width: 400px) {
     h1 {
         font-size: 2.5rem;
+    }
+    .navbar {
+        padding-top: 35%;
     }
     footer .lowerNav {
         align-items: center;
