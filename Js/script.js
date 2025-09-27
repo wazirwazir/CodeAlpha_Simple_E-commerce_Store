@@ -15,7 +15,7 @@ const sectionName = document.querySelector('#section_name')
 let productsContainer = document.querySelector('.items_sold')
 const removeAllBtn = document.querySelector('.removeBtn')
 let products;
-let cartedItems;
+
 
 if (productsContainer) {
     fetch('./data.json')
@@ -113,10 +113,8 @@ const removeCartedItems = () => {
   removeAllBtn.parentElement.parentElement.children[1].innerHTML = ''
   removeCarted()
   saveCartedProducts([])
-  const cartCount = document.querySelectorAll('.cart_count')
-  cartCount.forEach(counter => {
-    counter.innerHTML = ''
-  })
+  
+  removeTotals()
 }
 
 removeAllBtn.onclick = removeCartedItems
@@ -137,11 +135,9 @@ const addToCart = () => {
         quantity: itemCount,
         cost: price * itemCount
       } 
-      console.log(itemAdd)
       
       
       updateCartedProducts(itemAdd)
-      cartedItems = getCartedProducts()
       getSumOfCartItems(getCartedProducts(), 'quantity')
       renderCartedProducts()
     })
@@ -154,11 +150,7 @@ const getCartedProducts = () => {
   return JSON.parse(localStorage.getItem('allProducts')) || [];
 }
 
-/* const addCartedProducts = (item) => {
-  let store = getCartedProducts()
-  store.push(item);
-  saveCartedProducts(store)
-} */
+
 const updateCartedProducts = (product) => {
   let store = getCartedProducts();
   let existing = store.find(item => item.name == product.name)
@@ -211,5 +203,45 @@ const cartCounter = () => {
   cartCount.forEach(counter => {
     counter.innerHTML = getSumOfCartItems(getCartedProducts(), 'quantity')
   })
+  totalPrice()
+}
+
+const totalPrice = () => {
+  const total = document.querySelectorAll('.total_cost')
+  total.forEach(total => {
+    total.innerHTML = getSumOfCartItems(getCartedProducts(), 'cost').toLocaleString()
+  })
+  getVATandGrandTotal()
+} 
+const getVATandGrandTotal = () => {
+  if (!productsContainer){
+  const grand = document.querySelector('.total_grand')
+  const Vat = document.querySelector('.VAT')
+  let total = getSumOfCartItems(getCartedProducts(), 'cost')
+  let VAT = Math.round(total * 0.2)
+  let grandTotal = total + VAT + 50
+  grand.innerHTML = Math.round(grandTotal).toLocaleString()
+  Vat.innerHTML = VAT.toLocaleString()
+  }
+}
+const removeTotals = () => {
+  const cartCount = document.querySelectorAll('.cart_count')
+  const total = document.querySelectorAll('.total_cost')
+  cartCount.forEach(counter => {
+    counter.innerHTML = ''
+  })
+  total.forEach(total => {
+    total.innerHTML = 0
+  })
+
+  if (!productsContainer) {
+    const grand = document.querySelector('.total_grand')
+    const Vat = document.querySelector('.VAT')
+    const summaryCart = document.querySelector('.summary_cart')
+    summaryCart.innerHTML = ''
+    grand.innerHTML = 0
+    Vat.innerHTML = 0
+  }
+  
 }
 window.onload = renderCartedProducts
