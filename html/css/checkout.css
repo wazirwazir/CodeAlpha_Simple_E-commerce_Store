@@ -111,7 +111,7 @@ h3 {
     font-weight: 900;
     font-size: 1.2rem;
 }
-.payBtn {
+.longB {
     border: none;
     border-radius: 0;
     width: 100%;
@@ -124,7 +124,7 @@ h3 {
     text-transform: uppercase;
 }
 
-.payBtn:hover {
+.longB:hover {
     background-color: rgb(235, 133, 96);
 }
 .summary_subtitle .grand_total {
@@ -193,6 +193,66 @@ input[type=number] {
 .form {
     width: 100%;
 }
+.confirmation {
+    z-index: 100;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.356);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.confirmation .container {
+    width: 80%;
+    background-color: white;
+    padding: 2em;
+    border-radius: 10px;
+    max-width: 600px;
+}
+.confirmation .container .thanks h2 {
+    text-transform: uppercase;
+    
+}
+.container .thanks .notify {
+    color: gray;
+
+}
+.container .bought {
+    display: flex;
+    margin-top: 2em;
+}
+.container .bought .products_bought .others {
+    color: rgb(151, 151, 151);
+    font-weight: 900;
+    border-top: 1px solid grey;
+    text-align: center;
+    padding: .3em;
+}
+.container .bought .products_bought {
+    width: 50%;
+    background-color: rgba(226, 224, 224, 0.459);
+    border-radius: 10px 0 0 10px;
+    padding: .7em 1em;
+}
+.container .bought .products_bought .carted {
+    padding: .6em .2em;
+}
+.container .grandd_total{
+    background-color: black;
+    border-radius: 0 10px 10px 0;
+    padding: .5em;
+    width: 50%;
+}
+.container .grandd_total .wordTotal {
+    color: gray;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.container .grandd_total .amount {
+    color: white;
+    font-weight: bold;
+}
 @media (min-width: 950px) {
     form {
         flex-direction: row;
@@ -211,6 +271,21 @@ input[type=number] {
     
 }
 @media (max-width: 650px) {
+    .container .bought {
+        flex-direction: column;
+    }
+    .container .bought .products_bought {
+        width: 100%;
+        border-radius: 10px 10px 0 0;
+    }
+    .container .bought .products_bought .others {
+        display: none;
+    }
+    .container .grandd_total{
+        width: 100%;
+        border-radius: 0 0 10px 10px;
+        padding: .5em 1.5em ;
+    }
     .part_three {
         flex-direction: column;
     }
@@ -223,4 +298,7 @@ input[type=number] {
     .cash_on_delivery_info {
         flex-direction: column;   
     }
+}
+.hide {
+    display: none;
 }

@@ -9,11 +9,14 @@ const hideInfo = () => {
     if(codInput.checked) {
         emoneyDetails.classList.add('hide')
         cashDetails.classList.remove('hide')
+        allInputs[7].disabled = true
+        allInputs[8].disabled = true
         
     } else if (!codInput.checked) {
         emoneyDetails.classList.remove('hide')
         cashDetails.classList.add('hide')
-        
+        allInputs[7].disabled = false
+        allInputs[8].disabled = false
     }
 }
 
@@ -47,3 +50,4 @@ submitBtn.addEventListener('click', ()=> {
     handleEmoneyError(eNumberInput, 9)
     handleEmoneyError(ePinInput, 4)
 })
+

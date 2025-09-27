@@ -5,6 +5,7 @@ if (!localStorage.getItem('allProducts')) {
   saveCartedProducts([])
 }
 
+const formSubmitBtn = document.querySelector('form')
 const navBtn = document.querySelector('.hamburger')
 const navBar = document.querySelector('#navBar')
 const cartContainer = document.querySelector('.cartContainer')
@@ -214,15 +215,42 @@ const totalPrice = () => {
   getVATandGrandTotal()
 } 
 const getVATandGrandTotal = () => {
-  if (!productsContainer){
+  if (formSubmitBtn){
   const grand = document.querySelector('.total_grand')
   const Vat = document.querySelector('.VAT')
   let total = getSumOfCartItems(getCartedProducts(), 'cost')
+  const getVatIfNeeded = () => {if (total == 0) {return 0} else {return 50}}
   let VAT = Math.round(total * 0.2)
-  let grandTotal = total + VAT + 50
+  let grandTotal = total + VAT + getVatIfNeeded()
   grand.innerHTML = Math.round(grandTotal).toLocaleString()
   Vat.innerHTML = VAT.toLocaleString()
   }
+
+  
+}
+const orderComfirmation = () => {
+  const comfirmationContainer = document.querySelector('.confirmation')
+  let orders = getCartedProducts()
+  let total = getSumOfCartItems(getCartedProducts(), 'cost')
+  let VAT = Math.round(total * 0.2)
+  let grandTotal = total + VAT + 50
+  let firstOrder = getCartedProducts()[0]
+  const comfirmGrandTotal = document.querySelector('.comfirmGrandTotal')
+  const holder = document.querySelector('.item')
+  const otherLeft = document.querySelector('#otherLeft')
+  comfirmGrandTotal.innerHTML = grandTotal.toLocaleString()
+  holder.innerHTML = `
+      <div class="carted">
+          <img src="${firstOrder.img}" alt="carted_img">
+          <div class="carted_details">
+            <p>${firstOrder.name}</p>
+            <p>$<span>${firstOrder.price.toLocaleString()}</span></p>
+          </div>
+          <div class="item_quantity">
+            <p class="quantity_input">X<span>${firstOrder.quantity}</span></p>
+          </div>`
+  otherLeft.innerHTML = orders.length - 1
+  comfirmationContainer.classList.remove('hide')
 }
 const removeTotals = () => {
   const cartCount = document.querySelectorAll('.cart_count')
@@ -234,7 +262,7 @@ const removeTotals = () => {
     total.innerHTML = 0
   })
 
-  if (!productsContainer) {
+  if (formSubmitBtn) {
     const grand = document.querySelector('.total_grand')
     const Vat = document.querySelector('.VAT')
     const summaryCart = document.querySelector('.summary_cart')
@@ -242,6 +270,17 @@ const removeTotals = () => {
     grand.innerHTML = 0
     Vat.innerHTML = 0
   }
-  
+
 }
+
+if (formSubmitBtn) {
+  formSubmitBtn.addEventListener('submit', (e) => {
+    e.preventDefault()
+    orderComfirmation()
+    removeCartedItems()
+  })
+}
+
+
+
 window.onload = renderCartedProducts
