@@ -8,6 +8,9 @@ h1 {
 button {
     cursor: pointer;
 }
+input[type=submit] {
+    cursor: pointer;
+}
 main {
     background-color: rgb(243, 243, 243);
     padding: 5em 5%;
