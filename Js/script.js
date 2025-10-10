@@ -15,11 +15,15 @@ const ePinInput = document.querySelector('#e-Pin')
 const sectionName = document.querySelector('#section_name')
 let productsContainer = document.querySelector('.items_sold')
 const removeAllBtn = document.querySelector('.removeBtn')
+const logoutBtn = document.querySelector('#logout')
 let products;
+let user;
 
 
+
+//load products from db
 if (productsContainer) {
-    fetch('./data.json')
+    fetch('http://localhost:3000/')
     .then(response => response.json())
     .then(data => {
         console.log(data)
@@ -31,8 +35,17 @@ if (productsContainer) {
     .catch(err => console.error(err))
 }
 
+const getUserProfile = () => {
+  const userId = localStorage.getItem('userId')
+  if (!userId) {
+    window.location.href = 'index.html'
+  }
+  fetch(`http://localhost:3000/profile/${userId}`)
+  .then(response => response.json())
+  .then(data => console.log(data))
+}
 
-
+//handle navbar and cart display
 const displayNav = () => {
     if (!cartContainer.classList.contains('hide')) {
         cartContainer.classList.toggle('hide')
@@ -49,15 +62,13 @@ const displayCart = () => {
     cartContainer.classList.toggle('hide')
 }
 
-
-
-
 navBtn.onclick = displayNav
 cartBtn.onclick = displayCart
 
-
+//check if rendered product is new
 const checkNewProduct = (e) => {if(e.new == true) {return 'new product'} else{return ''}}
 
+//render products
 const renderProducts = (products) => {
     productsContainer.innerHTML = products.map(item => {
         return `<div class="itemSold">
@@ -84,10 +95,11 @@ const renderProducts = (products) => {
             `}).join('')
         }
 
+
+//handle item quantity of products
 const itemQuantity = () => {
         const addBtn = document.querySelectorAll('.add_btn')
         const subtractBtn = document.querySelectorAll('.subtract_btn')
-
             
             addBtn.forEach(btn => {
                 let quantity;
@@ -110,6 +122,9 @@ const itemQuantity = () => {
             })
             addToCart()
         }
+
+
+//remove items in cart
 const removeCartedItems = () => {
   removeAllBtn.parentElement.parentElement.children[1].innerHTML = ''
   removeCarted()
@@ -117,8 +132,9 @@ const removeCartedItems = () => {
   
   removeTotals()
 }
-
 removeAllBtn.onclick = removeCartedItems
+
+//add new item to cart
 const addToCart = () => {
   const addToCartBtn = document.querySelectorAll('.cartBtn')
   addToCartBtn.forEach(btn => {
@@ -147,11 +163,13 @@ const addToCart = () => {
 
 itemQuantity()
 
+
+//get products carted in local storage
 const getCartedProducts = () => {
   return JSON.parse(localStorage.getItem('allProducts')) || [];
 }
 
-
+//update
 const updateCartedProducts = (product) => {
   let store = getCartedProducts();
   let existing = store.find(item => item.name == product.name)
@@ -166,11 +184,13 @@ const updateCartedProducts = (product) => {
   getCartedProducts()
 }
 
+//remove
 const removeCarted = () => {
   localStorage.removeItem('allProducts')
 }
 
 
+//render carted products from local storage
 const renderCartedProducts = () => {
   let cart = getCartedProducts()
   const cartHolder = document.querySelectorAll('.carted_items')
@@ -191,6 +211,7 @@ const renderCartedProducts = () => {
   })
   
   cartCounter()
+  getUserProfile()
 }
 const getSumOfCartItems = (array, key) => {  
   
@@ -281,6 +302,12 @@ if (formSubmitBtn) {
   })
 }
 
-
+//handle logout
+const logout = () => {
+    console.log('hi')
+    localStorage.removeItem('userId')
+  
+}
+logoutBtn.onclick = logout
 
 window.onload = renderCartedProducts

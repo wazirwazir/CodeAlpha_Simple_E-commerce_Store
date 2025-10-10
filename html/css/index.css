@@ -341,6 +341,9 @@ footer .lowerNav li {
         margin: .5em 1em;
         cursor: pointer;
 }
+footer #logout a {
+    color: red;
+}
 footer .lowerNav li a {
     color: white;
     text-decoration: none;
@@ -485,6 +488,7 @@ footer .copyright {
     top: -10px;
     left: -10px;
 }
+
 
 @media (max-width: 900px) {
     .hamburger {

@@ -22,7 +22,7 @@ This example requires updating your template:
     </div>
 
     <div class="mt-10  sm:mx-auto sm:w-full sm:max-w-sm">
-        <form action="#" method="POST" class="space-y-6">
+        <form id="form" class="space-y-6">
         <div>
             <label for="name" class="block text-sm/6 font-medium text-gray-100">Full name</label>
             <div class="mt-2">
@@ -42,23 +42,25 @@ This example requires updating your template:
             </div>
             <div class="mt-2">
             <input id="password" type="password" name="password" required autocomplete="current-password" class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10  placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-[#D87D4A] hover:outline-[#D87D4A] sm:text-sm/6" />
+            <p id="error" class="text-red-500 font-bold hidden">Account already exists</p>
         </div>
         </div>
 
         <div>
     
         <a href="#">
-            <button type="submit" class="flex w-full justify-center rounded-md bg-[#D87D4A] px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-[#ffb89e] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 cursor-pointer">Register</button>
+            <button id="submit" type="submit" class="flex w-full justify-center rounded-md bg-[#D87D4A] px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-[#ffb89e] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 cursor-pointer">Register</button>
         </a>
         </div>
     </form>
 
         <p class="mt-5 text-center text-sm/6 text-gray-400">
         Have an account?
-        <a href="./Login.html" class="font-semibold text-[#D87D4A] hover:text-indigo-300">Sign in</a>
+        <a href="./index.html" class="font-semibold text-[#D87D4A] hover:text-indigo-300">Sign in</a>
         </p>
     </div>
 </div>
 
 </body>
+<script src="Js\register.js"></script>
 </html>

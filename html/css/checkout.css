@@ -12,6 +12,9 @@ main {
     background-color: rgb(243, 243, 243);
     padding: 5em 5%;
 }
+input[type="submit"] {
+    cursor: pointer;
+}
 .back {
     border: none;
     font-size: 1rem;
