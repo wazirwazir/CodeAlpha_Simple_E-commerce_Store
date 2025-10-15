@@ -6,7 +6,7 @@ const error = document.querySelector('#error')
 
 
 const login = () => {
-    fetch('http://localhost:3000/login', {
+    fetch('https://audiophile-ecommerce-api-1zr9.onrender.com/login', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({

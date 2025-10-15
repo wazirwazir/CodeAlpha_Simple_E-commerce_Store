@@ -22,7 +22,7 @@ const saveUserProfile = (e) => {
 
 //load products from db
 if (productsContainer) {
-    fetch('http://localhost:3000/')
+    fetch('https://audiophile-ecommerce-api-1zr9.onrender.com/')
     .then(response => response.json())
     .then(data => {
       console.log(data)
@@ -40,11 +40,11 @@ const getUserProfile = () => {
   if (!userId) {
     window.location.href = 'index.html'
   }
-  fetch(`http://localhost:3000/profile/${userId}`)
+  fetch(`https://audiophile-ecommerce-api-1zr9.onrender.com/${userId}`)
   .then(response => response.json())
   .then(data => {
     saveUserProfile(data)
-    return fetch('http://localhost:3000/carted', {
+    return fetch('https://audiophile-ecommerce-api-1zr9.onrender.com/carted', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -145,7 +145,7 @@ const itemQuantity = () => {
 const removeCartedItems = () => {
   removeAllBtn.parentElement.parentElement.children[1].innerHTML = ''
   
-  fetch('http://localhost:3000/cartdelete', {
+  fetch('https://audiophile-ecommerce-api-1zr9.onrender.com/cartdelete', {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -171,7 +171,7 @@ const addToCart = () => {
     let currentProduct = products.filter(p => p.name.toLowerCase() == name.toLowerCase())
     btn.addEventListener('click', () => {
     let itemCount = Number(btn.parentElement.querySelector('.item_quantity').querySelector('.quantity_input').innerText)
-      fetch('http://localhost:3000/cart', {
+      fetch('https://audiophile-ecommerce-api-1zr9.onrender.com/cart', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
