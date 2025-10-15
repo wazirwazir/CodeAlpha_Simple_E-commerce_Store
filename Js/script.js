@@ -1,10 +1,3 @@
-const saveCartedProducts = (data) => {
-  localStorage.setItem('allProducts', JSON.stringify(data)) 
-}
-if (!localStorage.getItem('allProducts')) {
-  saveCartedProducts([])
-}
-
 const formSubmitBtn = document.querySelector('form')
 const navBtn = document.querySelector('.hamburger')
 const navBar = document.querySelector('#navBar')
@@ -18,23 +11,30 @@ const removeAllBtn = document.querySelector('.removeBtn')
 const logoutBtn = document.querySelector('#logout')
 let products;
 let user;
+let cartedProducts;
 
 
+
+//save user info from db for use
+const saveUserProfile = (e) => {
+  user = e
+}
 
 //load products from db
 if (productsContainer) {
     fetch('http://localhost:3000/')
     .then(response => response.json())
     .then(data => {
-        console.log(data)
+      console.log(data)
         products = data.filter(item => item.category == sectionName.innerText.toLocaleLowerCase())
         renderProducts(products)
-        renderCartedProducts()
+        //renderCartedProducts()
         itemQuantity()
     })
     .catch(err => console.error(err))
 }
 
+//get user from db after login then get users items from cart
 const getUserProfile = () => {
   const userId = localStorage.getItem('userId')
   if (!userId) {
@@ -42,7 +42,23 @@ const getUserProfile = () => {
   }
   fetch(`http://localhost:3000/profile/${userId}`)
   .then(response => response.json())
-  .then(data => console.log(data))
+  .then(data => {
+    saveUserProfile(data)
+    return fetch('http://localhost:3000/carted', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            id: data.id
+        })
+    })
+    .then(response => response.json())
+    .then(data => {console.log(data)
+      cartedProducts = data
+      renderCartedProducts()
+      return data
+    })
+    
+  })
 }
 
 //handle navbar and cart display
@@ -70,6 +86,7 @@ const checkNewProduct = (e) => {if(e.new == true) {return 'new product'} else{re
 
 //render products
 const renderProducts = (products) => {
+  console.log(products)
     productsContainer.innerHTML = products.map(item => {
         return `<div class="itemSold">
                 <div class="img">
@@ -127,9 +144,20 @@ const itemQuantity = () => {
 //remove items in cart
 const removeCartedItems = () => {
   removeAllBtn.parentElement.parentElement.children[1].innerHTML = ''
-  removeCarted()
-  saveCartedProducts([])
   
+  fetch('http://localhost:3000/cartdelete', {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            user_id: user.id,
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+      cartedProducts = data
+      //renderCartedProducts()
+      console.log(data)
+      })
   removeTotals()
 }
 removeAllBtn.onclick = removeCartedItems
@@ -138,25 +166,27 @@ removeAllBtn.onclick = removeCartedItems
 const addToCart = () => {
   const addToCartBtn = document.querySelectorAll('.cartBtn')
   addToCartBtn.forEach(btn => {
-    let img = btn.parentElement.parentElement.previousElementSibling.children[0].src
     let about = btn.parentElement.parentElement
     let name = about.querySelector('h2').querySelector('span').innerText
-    let price = Number(about.querySelector('.item_price').querySelector('#itemPrice').innerText.replace(/,/g, ""))
-    
+    let currentProduct = products.filter(p => p.name.toLowerCase() == name.toLowerCase())
     btn.addEventListener('click', () => {
-      let itemCount = Number(btn.parentElement.querySelector('.item_quantity').querySelector('.quantity_input').innerText)
-      let itemAdd = {
-        name: name,
-        price: price,
-        img: img,
-        quantity: itemCount,
-        cost: price * itemCount
-      } 
-      
-      
-      updateCartedProducts(itemAdd)
+    let itemCount = Number(btn.parentElement.querySelector('.item_quantity').querySelector('.quantity_input').innerText)
+      fetch('http://localhost:3000/cart', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            user_id: user.id,
+            product_id: currentProduct[0].id,
+            quantity: itemCount
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+      cartedProducts = data
       getSumOfCartItems(getCartedProducts(), 'quantity')
       renderCartedProducts()
+      console.log(data)
+      })
     })
   })
 }
@@ -165,39 +195,21 @@ itemQuantity()
 
 
 //get products carted in local storage
-const getCartedProducts = () => {
-  return JSON.parse(localStorage.getItem('allProducts')) || [];
-}
-
-//update
-const updateCartedProducts = (product) => {
-  let store = getCartedProducts();
-  let existing = store.find(item => item.name == product.name)
-
-  if (existing) {
-    existing.quantity = product.quantity
-    existing.cost = product.cost
-  } else {
-    store.push(product)
-  }
-  saveCartedProducts(store)
-  getCartedProducts()
-}
-
-//remove
-const removeCarted = () => {
-  localStorage.removeItem('allProducts')
+const getCartedProducts =  () => {
+  return cartedProducts
 }
 
 
-//render carted products from local storage
-const renderCartedProducts = () => {
+
+//render carted products from db
+const renderCartedProducts =  () => {
   let cart = getCartedProducts()
   const cartHolder = document.querySelectorAll('.carted_items')
+  
   cartHolder.forEach(cartHolder => {
     cartHolder.innerHTML = cart.map(item => {
       return `<div class="carted">
-                <img src="${item.img}" alt="carted_img">
+                <img src="${item.image}" alt="carted_img">
                   <div class="carted_details">
                     <p>${item.name}</p>
                     <p>$<span>${item.price.toLocaleString()}</span></p>
@@ -211,7 +223,7 @@ const renderCartedProducts = () => {
   })
   
   cartCounter()
-  getUserProfile()
+  
 }
 const getSumOfCartItems = (array, key) => {  
   
@@ -262,7 +274,7 @@ const orderComfirmation = () => {
   comfirmGrandTotal.innerHTML = grandTotal.toLocaleString()
   holder.innerHTML = `
       <div class="carted">
-          <img src="${firstOrder.img}" alt="carted_img">
+          <img src="${firstOrder.image}" alt="carted_img">
           <div class="carted_details">
             <p>${firstOrder.name}</p>
             <p>$<span>${firstOrder.price.toLocaleString()}</span></p>
@@ -273,6 +285,8 @@ const orderComfirmation = () => {
   otherLeft.innerHTML = orders.length - 1
   comfirmationContainer.classList.remove('hide')
 }
+
+//remove total on checkout
 const removeTotals = () => {
   const cartCount = document.querySelectorAll('.cart_count')
   const total = document.querySelectorAll('.total_cost')
@@ -283,6 +297,7 @@ const removeTotals = () => {
     total.innerHTML = 0
   })
 
+  //get total summary
   if (formSubmitBtn) {
     const grand = document.querySelector('.total_grand')
     const Vat = document.querySelector('.VAT')
@@ -294,20 +309,24 @@ const removeTotals = () => {
 
 }
 
+//submit checkout form
 if (formSubmitBtn) {
   formSubmitBtn.addEventListener('submit', (e) => {
     e.preventDefault()
     orderComfirmation()
     removeCartedItems()
   })
+
 }
+
 
 //handle logout
 const logout = () => {
-    console.log('hi')
     localStorage.removeItem('userId')
   
 }
-logoutBtn.onclick = logout
 
-window.onload = renderCartedProducts
+
+logoutBtn.onclick = logout
+window.onload = getUserProfile
+
