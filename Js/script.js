@@ -40,7 +40,7 @@ const getUserProfile = () => {
   if (!userId) {
     window.location.href = 'index.html'
   }
-  fetch(`https://audiophile-ecommerce-api-1zr9.onrender.com/${userId}`)
+  fetch(`https://audiophile-ecommerce-api-1zr9.onrender.com/profile/${userId}`)
   .then(response => response.json())
   .then(data => {
     saveUserProfile(data)
