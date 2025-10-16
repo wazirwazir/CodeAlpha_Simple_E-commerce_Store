@@ -21,7 +21,7 @@ const register = () => {
         console.log(data)
         if (data.email == emailInput.value) {
             console.log(data.id)
-           // window.location.href = 'home.html'
+            window.location.href = 'home.html'
             localStorage.setItem('userId', data.id)
         } else {
             console.log('unsuccessful')
