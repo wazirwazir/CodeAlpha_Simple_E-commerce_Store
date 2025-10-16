@@ -25,10 +25,8 @@ if (productsContainer) {
     fetch('https://audiophile-ecommerce-api-1zr9.onrender.com/')
     .then(response => response.json())
     .then(data => {
-      console.log(data)
         products = data.filter(item => item.category == sectionName.innerText.toLocaleLowerCase())
         renderProducts(products)
-        //renderCartedProducts()
         itemQuantity()
     })
     .catch(err => console.error(err))
@@ -52,7 +50,7 @@ const getUserProfile = () => {
         })
     })
     .then(response => response.json())
-    .then(data => {console.log(data)
+    .then(data => {
       cartedProducts = data
       renderCartedProducts()
       return data
@@ -86,7 +84,6 @@ const checkNewProduct = (e) => {if(e.new == true) {return 'new product'} else{re
 
 //render products
 const renderProducts = (products) => {
-  console.log(products)
     productsContainer.innerHTML = products.map(item => {
         return `<div class="itemSold">
                 <div class="img">
@@ -155,8 +152,6 @@ const removeCartedItems = () => {
       .then(response => response.json())
       .then(data => {
       cartedProducts = data
-      //renderCartedProducts()
-      console.log(data)
       })
   removeTotals()
 }
@@ -185,7 +180,6 @@ const addToCart = () => {
       cartedProducts = data
       getSumOfCartItems(getCartedProducts(), 'quantity')
       renderCartedProducts()
-      console.log(data)
       })
     })
   })
