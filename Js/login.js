@@ -2,10 +2,11 @@ const emailInput = document.querySelector('#email')
 const passwordInput = document.querySelector('#password')
 const form = document.querySelector('form')
 const error = document.querySelector('#error')
-
+const load = document.querySelector('#load')
 
 
 const login = () => {
+    load.style.display = 'block'
     fetch('https://audiophile-ecommerce-api-1zr9.onrender.com/login', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -27,6 +28,7 @@ const login = () => {
         }
         
     })
+    .finally(() => load.style.display = 'none')
 }
 
 form.addEventListener('submit', (e) => {
