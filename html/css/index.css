@@ -1,7 +1,3 @@
-@font-face {
-    font-family: 'manrope';
-    src: url('/assets/fonts/Manrope/Manrope-VariableFont_wght.ttf');
-}
 html, body {
     scroll-behavior: smooth;
     margin: 0;
@@ -15,7 +11,7 @@ button:hover {
     transition-duration: 500ms;
 }
 * {
-    font-family: 'manrope', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: "Manrope", sans-serif;
 }
 
 header {
